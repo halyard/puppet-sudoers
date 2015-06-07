@@ -77,7 +77,7 @@ define sudoers::allowed_command(
     content => validate(template('sudoers/allowed-command.erb'), '/usr/sbin/visudo -cq -f'),
     mode    => '0440',
     owner   => 'root',
-    group   => sudoers::root_group(),
+    group   => sudoers::rootgroup(),
     require => $require_spec
   }
 }
