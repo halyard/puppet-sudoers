@@ -3,7 +3,7 @@ class sudoers {
     ensure => 'directory',
     mode   => '0660',
     owner  => 'root',
-    group  => $root_group
+    group  => root_group()
   }
 
   @file_line { 'include for sudoers.d':
