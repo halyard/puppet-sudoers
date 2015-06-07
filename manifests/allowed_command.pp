@@ -71,6 +71,16 @@ define sudoers::allowed_command(
     }
   }
 
+  file { '/etc/sudoers.d':
+    ensure => 'directory',
+    mode   => '0660',
+    owner  => 'root',
+    group  => $root_group
+  } ->
+  file_line { 'include for sudoers.d':
+    path => '/etc/sudoers',
+    line => '#includedir /etc/sudoers.d',
+  } ->
   file { "/etc/sudoers.d/${filename}":
     ensure  => file,
     content => validate(template('sudoers/allowed-command.erb'), '/usr/sbin/visudo -cq -f'),
@@ -79,5 +89,4 @@ define sudoers::allowed_command(
     group   => $root_group,
     require => $require_spec
   }
-
 }
