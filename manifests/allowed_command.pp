@@ -65,12 +65,16 @@ define sudoers::allowed_command(
   }
 
   if $require_exist {
-    $require_spec = $group ? {
+    $exist_spec = $group ? {
       undef   => $user ? { 'ALL' => undef, default => User[$user] },
       default => Group[$group]
     }
+    $require_spec = [$exist_spec, File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
+  } else {
+    $require_spec = [File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
   }
 
+  include sudoers
   realize(File['/etc/sudoers.d'], File_Line['include for sudoers.d'])
 
   file { "/etc/sudoers.d/${filename}":
@@ -79,6 +83,6 @@ define sudoers::allowed_command(
     mode    => '0440',
     owner   => 'root',
     group   => $root_group,
-    require => [$require_spec, File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
+    require => $require_spec
   }
 }
