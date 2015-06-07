@@ -71,18 +71,6 @@ define sudoers::allowed_command(
     }
   }
 
-  @file { '/etc/sudoers.d':
-    ensure => 'directory',
-    mode   => '0660',
-    owner  => 'root',
-    group  => $root_group
-  }
-
-  @file_line { 'include for sudoers.d':
-    path => '/etc/sudoers',
-    line => '#includedir /etc/sudoers.d',
-  }
-
   realize(File['/etc/sudoers.d'], File_Line['include for sudoers.d'])
 
   file { "/etc/sudoers.d/${filename}":
