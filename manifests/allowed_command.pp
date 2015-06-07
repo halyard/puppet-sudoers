@@ -59,6 +59,11 @@ define sudoers::allowed_command(
     default => "%${group}"
   }
 
+  $root_group = $::osfamily ? {
+    /(Darwin|FreeBSD|Solaris)/  => 'wheel',
+    default            		=> 'root',
+  }
+
   if $require_exist {
     $require_spec = $group ? {
       undef   => $user ? { 'ALL' => undef, default => User[$user] },
@@ -71,7 +76,7 @@ define sudoers::allowed_command(
     content => validate(template('sudoers/allowed-command.erb'), '/usr/sbin/visudo -cq -f'),
     mode    => '0440',
     owner   => 'root',
-    group   => 'root',
+    group   => $root_group,
     require => $require_spec
   }
 
