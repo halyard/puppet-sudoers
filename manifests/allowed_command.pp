@@ -50,8 +50,8 @@ define sudoers::allowed_command(
     fail('must define user or group')
   }
 
-  $all_flags = $require_password ? {
-    true  => $tags
+  $all_tags = $require_password ? {
+    true  => $tags,
     false => concat($tags, 'NOPASSWD')
   }
 
