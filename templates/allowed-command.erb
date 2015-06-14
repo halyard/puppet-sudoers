@@ -4,4 +4,6 @@
 <% @allowed_env_variables.each do |env_variable| -%>
 Defaults!<%= @command %> env_keep+=<%= @env_variable %>
 <% end -%>
-<%= @user_spec %> <%= @host %>=(<%= @run_as %>)<%= @nopasswd %> <%= @command %>
+<% tag_string = @all_tags.empty? ? '' : "#{@all_tags.join(':')}" %>
+<%= @user_spec %> <%= @host %>=(<%= @run_as %>)<%= tag_string %> <%= @command %>
+

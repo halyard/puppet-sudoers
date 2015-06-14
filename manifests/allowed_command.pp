@@ -40,6 +40,7 @@ define sudoers::allowed_command(
   $user             = undef,
   $group            = undef,
   $require_password = true,
+  $tags             = [],
   $comment          = undef,
   $allowed_env_variables = [],
   $require_exist    = true,
@@ -49,9 +50,9 @@ define sudoers::allowed_command(
     fail('must define user or group')
   }
 
-  $nopasswd = $require_password ? {
-    true  => '',
-    false => ' NOPASSWD:'
+  $all_flags = $require_password ? {
+    true  => $tags
+    false => concat($tags, 'NOPASSWD')
   }
 
   $user_spec = $group ? {
