@@ -1,3 +1,4 @@
+# Define global requirements for sudoers
 class sudoers {
   $rootgroup = $::osfamily ? {
     /(Darwin|FreeBSD|Solaris)/ => 'wheel',

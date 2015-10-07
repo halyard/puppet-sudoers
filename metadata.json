@@ -2,7 +2,7 @@
   "name": "halyard-sudoers",
   "version": "0.1.2",
   "author": "Les Aker",
-  "license": "Unknown",
+  "license": "MIT",
   "summary": "Configure sudoers via Boxen",
   "source": "https://github.com/halyard/puppet-sudoers",
   "project_page": "https://github.com/halyard/puppet-sudoers",

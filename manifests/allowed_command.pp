@@ -3,13 +3,16 @@
 #   Creates a new sudoers user specification in /etc/sudoers.d/
 #
 # Parameters:
-#   [*command*]               - the command you want to give access to, eg. '/usr/sbin/service'
-#   [*filename*]              - the name of the file to be placed in /etc/sudoers.d/ ($title)
+#   [*command*]               - the command you want to give access to,
+#                                 eg. '/usr/sbin/service'
+#   [*filename*]              - the name of the file to be placed in
+#                                 /etc/sudoers.d/ ($title)
 #   [*host*]                  - hosts which can run command (ALL)
 #   [*run_as*]                - user to run the command as (root)
 #   [*user*]                  - user to give access to
 #   [*group*]                 - group to give access to
-#   [*require_password*]      - require user to give password, setting to false sets 'NOPASSWD:' (true)
+#   [*require_password*]      - require user to give password, setting to
+#                                false sets 'NOPASSWD:' (true)
 #   [*comment*]               - comment to add to the file
 #   [*allowed_env_variables*] - allowed list of env variables ([])
 #   [*require_exist*]         - Require the Group or User to exist.
@@ -20,7 +23,7 @@
 #       command          => "/usr/sbin/service",
 #       user             => "acme",
 #       require_password => false,
-#       comment          => "Allows access to the service command for the acme user"
+#       comment          => "Allows the service command for acme user"
 #     }
 #
 # Creates the file:
@@ -47,7 +50,7 @@ define sudoers::allowed_command(
 ) {
 
   if (
-    ($user == undef and $group == undef) or 
+    ($user == undef and $group == undef) or
     ($user != undef and $group != undef)) {
       fail('must define one of user or group')
   }
@@ -70,7 +73,11 @@ define sudoers::allowed_command(
   } else {
     $exist_spec = undef
   }
-  $require_spec = [$exist_spec, File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
+  $require_spec = [
+    $exist_spec,
+    File['/etc/sudoers.d'],
+    File_Line['include for sudoers.d']
+  ]
 
   include sudoers
   realize(File['/etc/sudoers.d'], File_Line['include for sudoers.d'])
