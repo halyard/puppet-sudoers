@@ -1,0 +1,22 @@
+{
+  "name": "halyard-sudoers",
+  "version": "0.1.2",
+  "author": "Les Aker",
+  "license": "Unknown",
+  "summary": "Configure sudoers via Boxen",
+  "source": "https://github.com/halyard/puppet-sudoers",
+  "project_page": "https://github.com/halyard/puppet-sudoers",
+  "issues_url": "https://github.com/halyard/puppet-sudoers/issues",
+  "dependencies": [
+
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Darwin",
+      "operatingsystemmajrelease": [
+        "14",
+        "15"
+      ]
+    }
+  ]
+}

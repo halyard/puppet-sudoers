@@ -1,9 +1,14 @@
 class sudoers {
+  $rootgroup = $::osfamily ? {
+    /(Darwin|FreeBSD|Solaris)/ => 'wheel',
+    default                    => 'root',
+  }
+
   @file { '/etc/sudoers.d':
     ensure => 'directory',
     mode   => '0660',
     owner  => 'root',
-    group  => sudoers::rootgroup()
+    group  => $rootgroup
   }
 
   @file_line { 'include for sudoers.d':

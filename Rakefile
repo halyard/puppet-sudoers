@@ -1,7 +1,16 @@
-require 'rake'
+require 'puppetlabs_spec_helper/rake_tasks'
+require 'puppet_blacksmith/rake_tasks'
+require 'puppet-lint/tasks/puppet-lint'
+require 'puppet-syntax/tasks/puppet-syntax'
 
-require 'rspec/core/rake_task'
-
-RSpec::Core::RakeTask.new(:spec) do |t|
-  t.pattern = 'spec/*/*_spec.rb'
+PuppetLint::RakeTask.new(:lint) do |config|
+  config.fail_on_warnings = true
+  config.ignore_paths = ['vendor/**/*']
 end
+
+desc 'Run syntax and lint checks'
+task test: [
+  :metadata,
+  :syntax,
+  :lint
+]

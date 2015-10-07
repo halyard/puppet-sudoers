@@ -46,8 +46,10 @@ define sudoers::allowed_command(
   $require_exist    = true,
 ) {
 
-  if ($user == undef and $group == undef) {
-    fail('must define user or group')
+  if (
+    ($user == undef and $group == undef) or 
+    ($user != undef and $group != undef)) {
+      fail('must define one of user or group')
   }
 
   $all_tags = $require_password ? {
@@ -65,20 +67,21 @@ define sudoers::allowed_command(
       undef   => $user ? { 'ALL' => undef, default => User[$user] },
       default => Group[$group]
     }
-    $require_spec = [$exist_spec, File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
   } else {
-    $require_spec = [File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
+    $exist_spec = undef
   }
+  $require_spec = [$exist_spec, File['/etc/sudoers.d'], File_Line['include for sudoers.d']]
 
   include sudoers
   realize(File['/etc/sudoers.d'], File_Line['include for sudoers.d'])
 
   file { "/etc/sudoers.d/${filename}":
-    ensure  => file,
-    content => validate(template('sudoers/allowed-command.erb'), '/usr/sbin/visudo -cq -f'),
-    mode    => '0440',
-    owner   => 'root',
-    group   => sudoers::rootgroup(),
-    require => $require_spec
+    ensure       => file,
+    content      => template('sudoers/allowed-command.erb'),
+    mode         => '0440',
+    owner        => 'root',
+    group        => $sudoers::rootgroup,
+    validate_cmd => '/usr/sbin/visudo -cq -f',
+    require      => $require_spec
   }
 }
