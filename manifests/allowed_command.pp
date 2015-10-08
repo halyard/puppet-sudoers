@@ -65,13 +65,14 @@ define sudoers::allowed_command(
     default => "%${group}"
   }
 
+
   if $require_exist {
     $exist_spec = $group ? {
-      undef   => $user ? { 'ALL' => undef, default => User[$user] },
-      default => Group[$group]
+      undef   => $user ? { 'ALL' => [], default => User[$user] },
+      default => [Group[$group]]
     }
   } else {
-    $exist_spec = undef
+    $exist_spec = []
   }
   $require_spec = [
     $exist_spec,
