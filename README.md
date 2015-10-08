@@ -1,21 +1,12 @@
-# sudoers::allowed_command
+puppet-sudoers
+===========
+
+[![Puppet Forge](https://img.shields.io/puppetforge/v/halyard/sudoers.svg)](https://forge.puppetlabs.com/halyard/sudoers)
+[![Build Status](https://img.shields.io/circleci/project/halyard/puppet-sudoers.svg)](https://circleci.com/gh/halyard/puppet-sudoers)
 
 Puppet module for creating sudoers user specifications
 
-[![Build Status](https://travis-ci.org/phinze/puppet-sudoers.svg)](https://travis-ci.org/phinze/puppet-sudoers)
-
-### Install
-
-Using the Puppet Module Tool:
-
-    $ puppet module install phinze/sudoers
-
-As a git submodule:
-
-    $ git submodule add git@github.com:phinze/puppet-sudoers.git modules/sudoers
-
-
-### Usage
+## Usage
 
 The following puppet declaration:
 
@@ -56,3 +47,4 @@ The `allowed_command` type takes the following options (with defaults in bracket
 [*allowed_env_variables*] - allowed list of env variables ([])
 [*require_exist*]         - Require the Group or User to exist. Setting this to false for example is needed if the user groups come from Active Directory. (true)
 ```
+
