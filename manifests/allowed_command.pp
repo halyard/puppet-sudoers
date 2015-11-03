@@ -89,7 +89,7 @@ define sudoers::allowed_command(
     mode         => '0440',
     owner        => 'root',
     group        => $sudoers::rootgroup,
-    validate_cmd => '/usr/sbin/visudo -cq -f',
+    validate_cmd => '/usr/sbin/visudo -cq -f %',
     require      => $require_spec
   }
 }
