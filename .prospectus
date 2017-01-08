@@ -13,7 +13,8 @@ JSON.parse(File.read('metadata.json'))['dependencies'].each do |dep|
     expected do
       github_tag
       repo repo_slug
-      regex /^v(\d+\.\d+).\d+$/
+      regex /^(\d+\.\d+)\.\d+$/
+      filter /^\d+\.\d+.\d+$/
     end
 
     actual do
