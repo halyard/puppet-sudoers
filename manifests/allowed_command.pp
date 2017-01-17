@@ -47,6 +47,7 @@ define sudoers::allowed_command(
   $comment          = undef,
   $allowed_env_variables = [],
   $require_exist    = true,
+  $defaults = []
 ) {
 
   if (

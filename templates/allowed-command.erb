@@ -1,6 +1,9 @@
 <% if @comment -%>
 # <%= @comment %>
 <% end -%>
+<% @defaults.each do |default| -%>
+Defaults!<%= @command %> <%= default %>
+<% end -%>
 <% @allowed_env_variables.each do |env_variable| -%>
 Defaults!<%= @command %> env_keep+=<%= env_variable %>
 <% end -%>
