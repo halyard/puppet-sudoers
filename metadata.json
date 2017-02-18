@@ -1,6 +1,6 @@
 {
   "name": "halyard-sudoers",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "Les Aker",
   "license": "MIT",
   "summary": "Configure sudoers via Boxen",
