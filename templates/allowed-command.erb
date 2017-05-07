@@ -1,12 +1,16 @@
 <% if @comment -%>
 # <%= @comment %>
 <% end -%>
+
+Cmnd_Alias <%= @filename.upcase %> = <%= @command %>
+
 <% @defaults.each do |default| -%>
-Defaults!<%= @command %> <%= default %>
+Defaults!<%= @filename.upcase %> <%= default %>
 <% end -%>
 <% @allowed_env_variables.each do |env_variable| -%>
-Defaults!<%= @command %> env_keep+=<%= env_variable %>
+Defaults!<%= @filename.upcase %> env_keep+=<%= env_variable %>
 <% end -%>
+
 <% tag_string = @all_tags ? " #{@all_tags.join(':')}:" : '' %>
-<%= @user_spec %> <%= @host %>=(<%= @run_as %>)<%= tag_string %> <%= @command %>
+<%= @user_spec %> <%= @host %>=(<%= @run_as %>)<%= tag_string %> <%= @filename.upcase %>
 
