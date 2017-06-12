@@ -13,7 +13,8 @@ class sudoers {
   }
 
   @file_line { 'include for sudoers.d':
-    path => '/etc/sudoers',
-    line => '#includedir /etc/sudoers.d',
+    path  => '/etc/sudoers',
+    line  => '#includedir /etc/sudoers.d',
+    match => '^#includedir (\/private)?\/etc\/sudoers\.d$',
   }
 }
