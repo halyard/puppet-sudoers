@@ -2,7 +2,7 @@ puppet-sudoers
 ===========
 
 [![Puppet Forge](https://img.shields.io/puppetforge/v/halyard/sudoers.svg)](https://forge.puppetlabs.com/halyard/sudoers)
-[![Build Status](https://img.shields.io/circleci/project/halyard/puppet-sudoers/master.svg)](https://circleci.com/gh/halyard/puppet-sudoers)
+[![Build Status](https://img.shields.io/travis/com/halyard/puppet-sudoers.svg)](https://travis-ci.com/halyard/puppet-sudoers)
 
 Puppet module for creating sudoers user specifications
 
